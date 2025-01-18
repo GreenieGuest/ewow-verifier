@@ -209,19 +209,19 @@ function verifyResponse() {
   } else if (!supported.test(text)) {
       asciiChecker.innerHTML = "INVALID! Contains one or more unsupported characters.";
       asciiChecker.style.color = "red";
-      quippy.src = "quippyscream.webp";
+      quippy.src = "images/quippyscream.webp";
   } else if (count > 11) {
       asciiChecker.innerHTML = "INVALID! Over 11 words";
       asciiChecker.style.color = "red";
-      quippy.src = "quippyscream.webp";
+      quippy.src = "images/quippyscream.webp";
   } else if (count < 11) {
       asciiChecker.innerHTML = "VALID! Stay cautious...";
       asciiChecker.style.color = "yellow";
-      quippy.src = "quippybeam.webp";
+      quippy.src = "images/quippybeam.webp";
   } else {
       asciiChecker.innerHTML = "VALID!";
       asciiChecker.style.color = "lime";
-      quippy.src = "quippybeam.webp";
+      quippy.src = "images/quippybeam.webp";
   }
   
   //previews
