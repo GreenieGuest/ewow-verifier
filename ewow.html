@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EWOW Response Verifier | GreenieGuest</title>
+    <!-- The style.css file allows you to change the look of your web pages.
+         If you include the next line in all your web pages, they will all share the same look.
+         This makes it easier to make new pages for your site. -->
+    <link href="/ewow.css" rel="stylesheet" type="text/css" media="all">
+    <link rel="icon" type="image/x-icon" href="images/favicon.ico">
+  </head>
+  <body>
+    <!-- <div class="responseVerifier" contenteditable=true autofocus id="test123">Enter response here</div> -->
+    
+    <center><img src="ewowTitle.png" style="width: 400px; height: auto;"></center>
+    <div class="topbar" style="margin: 0 auto; height: 25px; padding: 5px;">
+       <b style="vertical-align: middle">EWOW Response Verifier</b>
+    </div>
+    <div class="infobox" style="margin: 0 auto; padding: 4px;">
+      <h1>Your response is <label id="asciiChecker">yet unknown!</label></h1>
+       <center><input id="test123" type="text" autofocus autocomplete="off" placeholder="bababnas"></center>
+      <p><span style='color: #FFBFBF;'>Word Count</span>: <label id="wordCount">N/A</label></p>
+      <p><span style='color: #ECFFBF;'>Verbosity</span>: <label id="verbosity">N/A</label></p>
+      <p><span style='color: #C1FFFF;'>Snoozingnewt's Meta Score</span>: <label id="metaScorer">N/A</label> (<a href="https://docs.google.com/spreadsheets/d/1_tGYDakOBbIS3P6GW5Svuq30OvD9C-N3mJkseNFa6c4/edit?gid=183153762#gid=183153762">methodology</a>)</p>
+      <hr width="95%">
+      <p><span style='color: #FFFFFF;'>Acronym</span>: <label id="acronym">N/A</label></p>
+      <p><span style='color: #FFFFFF;'>Reverse Acronym</span>: <label id="revAcronym">N/A</label></p>
+      <p align="right">
+      <img src="clippy.webp">
+      <img id="quippy" src="quippyscream.webp">
+      </p>
+    </div>
+    
+    <br>
+    <div style="height: auto; overflow: auto;">
+    <h2 align="center">Response Previews (best on desktop, no auto-scale)</h2>
+    <center>Note: some unsupported symbols may incorrectly show up. In EWOW they are replaced by boxes (□).</center>
+    <center>Note 2: there isn't an easy way to auto-size text here, so responses' text will wrap. Normally responses are auto-scaled.</center>
+    <p align="center">Font-supported symbols: ¡¢£¥§¨©ª«®¯°´¶·¸º»¿ÀÁÂÃÄÅÆÇÈÉÊËÌÍÎÏÐÑÒÓÔÕÖØÙÚÛÜÝÞßàáâãäåæçèéêëìíîïðñòóôõöøùúûüýþÿıŁłŒœŠšŸŽžƒˆˇ˘˙˚˛˜˝–—‘’‚“”„†‡•…‰‹›⁄™ﬁﬂ</p>
+    <h4 align="center">Voting Screen</h4>
+    <table id="votingScreen">
+      <tr>
+        <td style="width:20px"><span style='color: #0079FC;'>A</span></td>
+        <td><label id="vsResponse">Lorem impsum dolor sit amet.</label> <label style="width:20px" id="vsWordCount">5</label></td>
+      </tr>
+    </table>
+    <h4 align="center">Round Leaderboard</h4>
+    <table id="bLeaderboard">
+      <tr>
+        <th></th>
+        <th></th>
+        <th></th>
+        <th></th>
+        <th>Score</th>
+        <th>St. Dev.</th>
+        <th style="font-size: 10px">Voters</th>
+        <th style="font-size: 10px">Lives</th>
+        <th style="font-size: 10px">Entries</th>
+      </tr>
+      <tr>
+        <td style="width:16px">1st</td>
+        <td style="width:130px; text-align: right" contenteditable="true">Your Name</td>
+        <td style="width:16px"><img src="tweeny.png" style="width: 22px; height: 22px"></td>
+        <td><label id="blResponse">Lorem impsum dolor sit amet.</label> <label id="blWordCount">5</label></td>
+        <td style="width:5%; text-align: center" contenteditable="true">80.00%</td>
+        <td style="width:5%; text-align: center" contenteditable="true">21.94%</td>
+        <td style="width:16px; text-align: center" contenteditable="true">47</td>
+        <td style="width:16px; text-align: center" contenteditable="true">4</td>
+        <td style="width:16px; text-align: center" contenteditable="true">3</td>
+      </tr>
+      <tr>
+        <td style="width:16px">2nd</td>
+        <td style="width:130px; text-align: right" contenteditable="true">Your Rival</td>
+        <td style="width:16px"><img src="quippyscream.webp" style="width: 22px; height: 22px"></td>
+        <td><label id="blResponse" contenteditable="true">Earth's excessive pollution tripped their spaceships' navigation sensors. Visiting becomes dangerous!</label> <label id="blWordCount">11</label></td>
+        <td style="width:5%; text-align: center" contenteditable="true">79.99%</td>
+        <td style="width:5%; text-align: center" contenteditable="true">31.58%</td>
+        <td style="width:16px; text-align: center" contenteditable="true">50</td>
+        <td style="width:16px; text-align: center" contenteditable="true">1</td>
+        <td style="width:16px; text-align: center" contenteditable="true">2</td>
+      </tr>
+      <tr>
+        <td style="width:16px">3rd</td>
+        <td style="width:130px; text-align: right" contenteditable="true">Your Other Rival</td>
+        <td style="width:16px"><img src="book.png" style="width: 22px; height: 22px"></td>
+        <td><label id="blResponse" contenteditable="true">bababnas</label> <label id="blWordCount">1</label></td>
+        <td style="width:5%; text-align: center" contenteditable="true">77.64%</td>
+        <td style="width:5%; text-align: center" contenteditable="true">24.53%</td>
+        <td style="width:16px; text-align: center" contenteditable="true">33</td>
+        <td style="width:16px; text-align: center" contenteditable="true">3</td>
+        <td style="width:16px; text-align: center" contenteditable="true">2</td>
+      </tr>
+    </table>
+    </div>
+    <br>
+    
+    <footer><a href="https://ewow.page/"><img src="https://ewow.page/images/ewow-page.gif?1" alt="ewow.page" title="ARE WE EWOWING YET?" style="width: 176px; height: 62px"></a>
+    <br>
+    <h6>Your stuff is not saved ANYWHERE.</h6></footer>
+  <script src="test.js"></script>
+  <script type="text/javascript" src="https://github.com/niklasvh/html2canvas/releases/download/0.5.0-alpha1/html2canvas.js"></script>
+  </body>
+</html>
