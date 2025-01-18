@@ -1,0 +1,162 @@
+/* CSS is how you can add style to your website, such as colors, fonts, and positioning of your
+   HTML content. To learn how to do something, just try searching Google for questions like
+   "how to change link color." */
+
+@font-face {
+  font-family: Interstate;
+  src: url(interstate.otf);
+}
+
+@font-face {
+  font-family: Roboto;
+  src: url(roboto.otf);
+}
+
+body {
+  background-color: black;
+  background-image: url(checker.png);
+  background-repeat: repeat;
+  color: white;
+  font-family: Arial;
+  animation: tween 100s linear infinite;
+}
+
+h1 {
+  padding-left: 2.5%;
+}
+
+p {
+  padding-left: 2.5%;
+  font-style: normal;
+  font-weight: normal;
+}
+
+label {
+  font-weight: bold;
+  font-style: italic;
+}
+
+img {
+  width: 50px;
+  height: 50px;
+  align-self: flex-end;
+}
+
+footer {
+  text-align: center;
+}
+
+.topbar {
+  width: 50%;
+  min-width: 400px;
+  background-image: url(gradient.png);
+  background-repeat: repeat;
+  background-color: darkblue;
+  border-style: hidden;
+  border-width: 2px;
+  border-radius: 25px 25px 0 0; 
+  color: white;
+  font-family: Verdana;
+  text-indent: 15px;
+}
+    
+.infobox {
+  width: 50%;
+  min-width: 400px;
+  height: auto;
+  background-color: black;
+  border-style: solid;
+  border-color: silver;
+  border-width: 0 1px 1px 1px;
+  border-radius: 0 0 25px 25px;
+  padding: 10px;
+}
+/* This infobox is held up by sticks and stones and NO ONE can judge me for it! except for the people smart enough to read this and judge me for it */
+
+#votingScreen {
+  width: 950px;
+  margin: 0 auto;
+  background-color: white;
+  color: black;
+  border-style: solid;
+  border-color: black;
+  border-width: 1px 1px 1px 1px;
+  font-family: "Interstate";
+  font-size: 20px;
+  text-align: left;
+  padding: 10px;
+}
+label[id=vsResponse] {
+  font-style: normal;
+  font-weight: normal;
+}
+label[id=vsWordCount] {
+  font-style: normal;
+  font-weight: normal;
+  color: red;
+}
+
+th {
+  text-align: center;
+  background-color: white;
+  color: grey;
+  font-family: "Roboto";
+  font-weight: normal;
+}
+label[id=blResponse] {
+  font-style: normal;
+  font-weight: normal;
+}
+label[id=blWordCount] {
+  color: blue;
+  font-style: normal;
+  font-weight: bold;
+}
+
+
+
+#bLeaderboard {
+  width: 1260px;
+  margin: 0 auto;
+  background-color: #FFE68B;
+  color: black;
+  border-style: solid;
+  border-color: black;
+  border-width: 1px 1px 1px 1px;
+  border-collapse: collapse;
+  font-family: "Roboto";
+  font-size: 16px;
+  text-align: left;
+  padding: 2px;
+}
+
+#bLeaderboard tr:nth-child(even){background-color: #F2D67A;}
+
+input[type=text] {
+  width: 95%;
+  border: 2px solid grey;
+  border-radius: 0 8px 0 8px;
+  background-color: #F4CADE;
+  color: white;
+  background-image: url('gradient.png');
+  background-size: contain;
+  font-size: 20px;
+  align-self: center;
+}
+
+label[id=acronym] {
+  color: #7F92FF;
+}
+label[id=revAcronym] {
+  color: #FFB27F;
+}
+
+::placeholder {
+  color: white;
+  opacity: .5; /* Firefox */
+}
+
+@keyframes tween {
+  from {background-position: bottom left;}
+  to {background-position: top right;}
+}
