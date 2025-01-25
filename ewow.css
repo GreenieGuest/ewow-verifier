@@ -3,8 +3,8 @@
    "how to change link color." */
 
 @font-face {
-  font-family: Interstate;
-  src: url(fonts/interstate.otf);
+  font-family: Overpass;
+  src: url(fonts/overpass.otf);
 }
 
 @font-face {
@@ -81,7 +81,7 @@ footer {
   border-style: solid;
   border-color: black;
   border-width: 1px 1px 1px 1px;
-  font-family: "Interstate";
+  font-family: "Overpass";
   font-size: 20px;
   text-align: left;
   padding: 10px;
