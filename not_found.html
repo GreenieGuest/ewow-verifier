@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Not Found | GreenieGuest</title>
+    <link href="/style.css" rel="stylesheet" type="text/css" media="all">
+    
+<meta charset="utf-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<script><!--
+window.addEventListener("load", function (ev) {
+  var init = function (area, remains, bombs, horizontal, vertical) {
+    area.innerHTML = "";
+    area.style.lineHeight = "1";
+    var size = {horizontal: horizontal, vertical: vertical};
+    var buttons = [];
+    var state = {
+      bombs: bombs, size: size, buttons: buttons, started: false,
+      area: area, remains: remains,
+    };
+    for (var i = 0; i < size.vertical; i++) {
+      for (var j = 0; j < size.horizontal; j++) {
+        var button = document.createElement("button");
+        button.style.width = button.style.height = "20px";
+        button.style.fontSize = "14px";
+        button.style.color = "black";
+        button.style.backgroundColor = "gray";
+        button.innerHTML = "&nbsp;";
+        button.data = {x: j, y: i, opened: false, bomb: false, near: 0};
+        button.data.index = size.horizontal * i + j;
+        button.state = state;
+        button.addEventListener("dblclick", doOpen, false);
+        button.addEventListener("click", doMark, false);
+        area.appendChild(button);
+        buttons.push(button);
+      }
+      var br = document.createElement("br");
+      area.appendChild(br);
+    }
+    return state;
+  };
+  
+  var putBombsAvoid = function (button) {
+    var avoids = neighbors(button).map(function (n) {return n.data.index;});
+    avoids.push(button.data.index);
+    var buttons = button.state.buttons;
+    var bombs = Math.min(button.state.bombs, buttons.length / 2);
+    for (var i = 0; i < bombs; i++) {
+      while (true) {
+        var index = 0| Math.random() * buttons.length;
+        if (avoids.indexOf(index) >= 0) continue;
+        var button = buttons[index];
+        if (button.data.bomb) continue;
+        button.data.bomb = true;
+        neighbors(button).forEach(function (n) {
+          n.data.near++;
+        });
+        break;
+      }
+    }
+  };
+  
+  var pick = function (x, y, state) {
+    if (x < 0 || state.size.horizontal <= x) return null;
+    if (y < 0 || state.size.vertical <= y) return null;
+    return state.buttons[state.size.horizontal * y + x]
+  };
+  
+  var nears = function (button, diffs) {
+    var result = [];
+    for (var i = 0; i < diffs.length; i++) {
+      var d = diffs[i];
+      var n = pick(button.data.x + d[0], button.data.y + d[1], button.state);
+      if (n) result.push(n);
+    }
+    return result;
+  };
+  
+  var neighbors = function (button) {
+    var diffs = [[-1, -1], [0, -1], [1, -1],
+                 [-1,  0],          [1,  0],
+                 [-1,  1], [0,  1], [1,  1]];
+    return nears(button, diffs);
+  };
+  
+  var nearColor = [
+    "black", "blue", "green", "red", 
+    "darkblue", "darkred", "cyan", "magenta", "yellow"];
+  var open = function (button) {
+    button.innerHTML = "&nbsp;";
+    if (button.data.near > 0) {
+      button.textContent = button.data.near;
+      button.style.color = nearColor[button.data.near];
+    }
+    if (button.data.bomb) {
+      button.textContent = "*";
+      button.style.color = "black";
+    }
+    button.style.backgroundColor = "white";
+    button.data.opened = true;
+  };
+  
+  var doOpen = function (ev) {
+    var button = ev.target;
+    if (!button.state.started) {
+      button.state.started = true;
+      putBombsAvoid(button);
+    }
+    if (button.data.bomb) {
+      open(button);
+      setTimeout(function () {
+        alert("*BOOOOOOM*");
+        location.reload();
+      }, 0);
+    } else {
+      openNeighbors(button);
+      if (isCompleted(button.state.buttons)) {
+        setTimeout(function () {
+          alert("You won! Congratulations!");
+          location.reload();
+        }, 0);
+      }
+    }
+    button.state.remains.textContent = remains(button.state.buttons);
+  };
+  
+  var doMark = function (ev) {
+    var button = ev.target;
+    if (button.data.opened) return;
+    if (button.innerHTML === "&nbsp;") {
+      button.textContent = "$";
+      button.style.color = "crimson";
+    } else if (button.textContent === "$") {
+      button.textContent = "?";
+      button.style.color = "ivory";
+    } else {
+      button.innerHTML = "&nbsp;";
+      button.style.color = "black";
+    }
+    button.state.remains.textContent = remains(button.state.buttons);
+  };
+  
+  var openNeighbors = function (button) {
+    if (button.data.opened) return;
+    open(button);
+    if (button.data.near === 0) neighbors(button).forEach(function (n) {
+      openNeighbors(n);
+    });
+  };
+  
+  var isCompleted = function (buttons) {
+    for (var i = 0; i < buttons.length; i++) {
+      if (!buttons[i].data.bomb && !buttons[i].data.opened) return false;
+    }
+    return true;
+  };
+  
+  var remains = function (buttons) {
+    return buttons.reduce(function (sum, b) {
+      return sum + (b.data.bomb ? 1 : 0) - (b.textContent === "$" ? 1 : 0);
+    }, 0);
+  };
+  
+  init(
+    document.getElementById("area"), 
+    document.getElementById("remains"), 
+    40, 16, 16);
+}, false);
+--></script>
+  </head>
+  <body>
+    <h1>Page Not Found</h1>
+    <p>The requested page was not found. It seems you've gotten lost, maybe try going <a href="https://greenieguest.neocities.org"><u>back.</u></a></p>
+    <br>
+    <p>Or, enjoy playing a nice game of Sudoku or Minesweeper while you're here.</p>
+    <iframe frameborder="0" scrolling="no" src="https://mczak.com/code/sudoku/suframe/" style="border:0px solid #eee; overflow:hidden; width:400px; height:500px;" width="400"></iframe>
+    
+    <div id="area"></div><div>bombs: <span id="remains">0</span></div>
+  </body>
+</html>

@@ -1,8 +1,25 @@
+//stuff and thangs -rick grimes
+//pls forgive me im kinda bad at this
+const element = document.getElementById("test123");
+const wordCount = document.getElementById("wordCount");
+const asciiChecker = document.getElementById("asciiChecker");
 const verbosity = document.getElementById("verbosity");
+const verbosityS = document.getElementById("verbosityS");
 const acronym = document.getElementById("acronym");
 const revAcronym = document.getElementById("revAcronym");
+const parentheses = document.getElementById("parentheses");
+const noParentheses = document.getElementById("noParentheses");
+const brackets = document.getElementById("brackets");
 const metaScorer = document.getElementById("metaScorer");
 const quippy = document.getElementById("quippy");
+
+//Score Thresholder
+const score = document.getElementById("score");
+const stName = document.getElementById("stName");
+const stResponse = document.getElementById("stResponse");
+const stPlacement = document.getElementById("stPlacement");
+const stScore = document.getElementById("stScore");
+const stNR = document.getElementById("stNR");
 
 //Previews
 const vsResponse = document.getElementById("vsResponse");
@@ -10,6 +27,7 @@ const vsWordCount = document.getElementById("vsWordCount");
 
 const blResponse = document.getElementById("blResponse");
 const blWordCount = document.getElementById("blWordCount");
+
 
 
 const supported = /^[ -~¡¢£¥§¨©ª«®¯°´¶·¸º»¿ÀÁÂÃÄÅÆÇÈÉÊËÌÍÎÏÐÑÒÓÔÕÖØÙÚÛÜÝÞßàáâãäåæçèéêëìíîïðñòóôõöøùúûüýþÿıŁłŒœŠšŸŽžƒˆˇ˘˙˚˛˜˝–—‘’‚“”„†‡•…‰‹›⁄™ﬁﬂ]+$/; //thanks losered
@@ -24,7 +42,7 @@ function getWordCount(stri) {
     for (const word of words) {
         let hasAlphanum = false;
         for (const ch of word) {
-            if (/^[0-9A-Za-z]+$/.test(ch)) {
+            if (/[\p{L}0-9]/u.test(ch)) {
                 hasAlphanum = true;
                 break;
             } else {
@@ -36,6 +54,23 @@ function getWordCount(stri) {
         }
     }
     return wordCount;
+}
+
+function getVerbositySplit(stri) {
+    const words = stri.split(" ");
+    const firstLetters = [];
+  
+    for (const word of words) {
+      let trimmed = word.replace(/\W/g, ''); //remove non-alphanumeric so that punctuation isnt accounted for
+      
+      let subLength = trimmed.length;
+      if (subLength) {
+        firstLetters.push(subLength);
+      }
+    }
+    
+    let joined = firstLetters.join('-');
+    return joined;
 }
 
 function getAcronym(stri) {
@@ -51,6 +86,24 @@ function getAcronym(stri) {
     
     let joined = firstLetters.join('');
     return joined.toUpperCase();
+}
+
+function getParentheses(stri) {
+    const inParentheses = stri.match(/(?<=\()[^\)(]*(?=\))/g);
+    
+    return inParentheses ? inParentheses.join('') : "N/A";
+}
+
+function removeParentheses(stri) {
+    const inParentheses = stri.match(/(?<=\()[^\)(]*(?=\))/g); //if theres no parentheses at all, gives N/A (this is probably inefficient af LOL)
+    
+    return inParentheses ? stri.replace(/\([^)]*\) */g, "") : "N/A";
+}
+
+function getBrackets(stri) {
+    const inBrackets = stri.match(/(?<=\[)[^\][]*(?=])/g);
+    
+    return inBrackets ? inBrackets.join('') : "N/A";
 }
 
 function getReverseAcronym(stri) {
@@ -184,6 +237,34 @@ function checkMeta(stri) { //Credit to Snoozingnewt for calculating the whole th
     return metaScore;
 }
 
+//Score Checker
+function scoreChecker() {
+  let s = score.value;
+  
+  fetch('data.json')
+    .then(response => response.json())
+    .then(jsonData => {
+      const closestItem = jsonData.reduce((prev, curr) => {
+        return Math.abs(curr.score - s) < Math.abs(prev.score - s)
+          ? curr
+          : prev;
+      });
+      
+      stName.innerHTML = closestItem.name;
+      stResponse.innerHTML = "\""+closestItem.response+"\"";
+      stPlacement.innerHTML = closestItem.rank+"/600";
+      stScore.innerHTML = closestItem.score+"%";
+      if (typeof closestItem.score == "number") {
+        let nr = 100-((((closestItem.rank - 1)/599))*100);
+        
+        stNR.innerHTML = (Math.round(nr * 100) / 100)+"%";
+      } else {
+        stNR.innerHTML = "N/A";
+      }
+    })
+    .catch(error => console.error('Error fetching JSON:', error));
+}
+
 //Main Function
 
 function verifyResponse() {
@@ -196,12 +277,20 @@ function verifyResponse() {
   let ac = getAcronym(text);
   let rac = getReverseAcronym(text);
   let meta = checkMeta(text);
+  let ip = getParentheses(text);
+  let rp = removeParentheses(text);
+  let ib = getBrackets(text);
+  let vs = getVerbositySplit(text);
   
   wordCount.innerHTML = count;
   verbosity.innerHTML = length;
+  verbosityS.innerHTML = vs;
   acronym.innerHTML = ac;
   revAcronym.innerHTML = rac;
-  metaScorer.innerHTML = meta;
+  metaScorer.innerHTML = Math.round(meta * 100) / 100;
+  parentheses.innerHTML = ip;
+  noParentheses.innerHTML = rp;
+  brackets.innerHTML = ib;
   
   //check response validity
   if (!text) {
@@ -238,4 +327,11 @@ document.onkeyup = function(){
   if (document.activeElement == element) {
     verifyResponse();
   }
+  if (document.activeElement == score) {
+    scoreChecker();
+  }
 };
+score.addEventListener("input", () => {
+    scoreChecker();
+});
+

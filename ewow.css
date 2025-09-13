@@ -25,6 +25,10 @@ h1 {
   padding-left: 2.5%;
 }
 
+h2 {
+  padding-left: 2.5%;
+}
+
 p {
   padding-left: 2.5%;
   font-style: normal;
@@ -49,7 +53,7 @@ footer {
 .topbar {
   width: 50%;
   min-width: 400px;
-  background-image: url(images/gradient.png);
+  background-image: linear-gradient(black, darkblue);
   background-repeat: repeat;
   background-color: darkblue;
   border-style: hidden;
@@ -82,7 +86,7 @@ footer {
   border-color: black;
   border-width: 1px 1px 1px 1px;
   font-family: "Overpass";
-  font-size: 20px;
+  font-size: 24px;
   text-align: left;
   padding: 10px;
 }
@@ -138,10 +142,37 @@ input[type=text] {
   border-radius: 0 8px 0 8px;
   background-color: #F4CADE;
   color: white;
-  background-image: url('images/gradient.png');
+  background-image: linear-gradient(#F4CADE, black);
   background-size: contain;
   font-size: 20px;
-  align-self: center;
+  display: block;
+  margin: 0 auto;
+}
+
+input[type=number] {
+  width: 95%;
+  border: 2px solid grey;
+  border-radius: 0 8px 0 8px;
+  background-color: #C0FFEE;
+  color: white;
+  background-image: linear-gradient(#C0FFEE, black);
+  background-size: contain;
+  font-size: 20px;
+  display: block;
+  margin: 0 auto;
+}
+
+input[id=input] {
+  width: 95%;
+  border: 2px solid grey;
+  border-radius: 0 8px 0 8px;
+  background-color: #C0FFEE;
+  color: white;
+  background-image: linear-gradient(#C0FFEE, black);
+  background-size: contain;
+  font-size: 20px;
+  display: block;
+  margin: 0 auto;
 }
 
 label[id=acronym] {
@@ -149,6 +180,32 @@ label[id=acronym] {
 }
 label[id=revAcronym] {
   color: #FFB27F;
+}
+label[id=parentheses] {
+  color: #7FFF8E;
+}
+label[id=noParentheses] {
+  color: #FF7F7F;
+}
+label[id=brackets] {
+  color: #7FC9FF;
+}
+label[id=verbosityS] {
+  font-style: normal;
+  font-weight: normal;
+}
+
+label[id=stName] {
+  color: #7FFFFF;
+}
+label[id=stResponse] {
+  color: #FFE97F;
+}
+label[id=stPlacement] {
+  color: #7FC9FF;
+}
+label[id=stScore] {
+  color: #7F92FF;
 }
 
 ::placeholder {
